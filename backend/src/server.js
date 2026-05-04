@@ -6,7 +6,8 @@ import { connectDB } from "./db/config.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { ENV } from "./lib/env.js";
-const app = express();
+import { app, server } from "./lib/socket.js";
+
 const PORT = ENV.ENVPORT || 3000;
 app.use(express.json({ limit: "5mb" }));
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
@@ -25,7 +26,7 @@ if (ENV.NODE_ENV === "production") {
   });
 }
 connectDB().then(() => {
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`server running on port ${PORT}`);
   });
 });
