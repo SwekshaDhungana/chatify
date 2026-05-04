@@ -53,7 +53,7 @@ export const sendMessage = async (req, res) => {
     }
     let imgUrl;
     if (image) {
-      const uploadResponse = cloudinary.uploader.upload(image);
+      const uploadResponse = await cloudinary.uploader.upload(image);
       imgUrl = uploadResponse.secure_url;
     }
 
